@@ -39,33 +39,22 @@
 
 ### Содержимое папок
 
-groebner-lex/
-│
-├── main_tester_100.py # Основной скрипт запуска экспериментов
-├── grafic_100.py # Скрипт построения графиков
-├── README.md # Описание проекта
-│
-├── json/ # Входные тестовые системы
-│ ├── comb3000.json
-│ ├── el44.json
-│ ├── cyclic7.json
-│ └── geneig.json
-│
-├── geneig_lex/ # Результаты для теста geneig
-│ ├── geneig_run001.json # JSON-файлы прогонов (600 файлов)
-│ ├── geneig_run002.json
-│ ├── ...
-│ ├── geneig_run600.json
-│ ├── position_counts_600.csv # Сводная таблица результатов
-│ ├── time_by_variable_at_position_1.png # Графики
-│ ├── time_by_variable_at_position_2.png
-│ ├── time_by_variable_at_position_3.png
-│ ├── time_by_variable_at_position_4.png
-│ ├── time_by_variable_at_position_5.png
-│ ├── time_by_variable_at_position_6.png
-│ └── time_vs_memory_clean_and_full.png
-│
-├── comb3000_lex/ # Результаты для теста comb3000 (аналогичная структура)
+**groebner-lex/**
+- `main_tester_100.py` — основной скрипт запуска экспериментов
+- `grafic_100.py` — скрипт построения графиков
+- `README.md` — описание проекта
+
+**json/** — входные тестовые системы
+- `geneig.json`
+- `comb3000.json`
+
+**geneig_lex/** — результаты для теста geneig
+- `geneig_run001.json` ... `geneig_run600.json` — JSON-файлы прогонов 
+- `position_counts_600.csv` — сводная таблица результатов
+- `time_by_variable_at_position_1.png` ... `time_by_variable_at_position_6.png` — графики
+- `time_vs_memory_clean_and_full.png`
+
+**comb3000_lex/** — результаты для теста comb3000 (аналогичная структура)
 
 
 ## Как воспроизвести эксперимент
