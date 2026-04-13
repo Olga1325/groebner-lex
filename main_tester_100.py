@@ -109,7 +109,7 @@ def generate_var_orders(variables, n=5):
     return unique_orders[:n]
 
 
-def generate_lex_orders(variables, total_runs=30, mode='balanced_first'):
+def generate_lex_orders(variables, total_runs=100, mode='balanced_first'):
     n = len(variables)
     orders = []
 
@@ -128,6 +128,26 @@ def generate_lex_orders(variables, total_runs=30, mode='balanced_first'):
                 orders.append(order)
 
         print(f"Сгенерировано {len(orders)} порядков (по {total_runs} на каждую ведущую переменную)")
+
+    elif mode == 'balanced_every_position':
+        total_orders = n * n * total_runs  # n переменных
+        print(f"Режим balanced_every_position: каждая переменная будет на каждой позиции ровно {total_runs} раз")
+        print(f"Итого будет сгенерировано {total_orders} порядков\n")
+
+        for pos in range(n):  # 0-based позиция
+            for target_var in variables:
+                remaining = [v for v in variables if v != target_var]
+                for _ in range(total_runs):
+                    shuffled_rem = remaining[:]
+                    random.shuffle(shuffled_rem)
+                    order = [None] * n
+                    order[pos] = target_var
+                    idx = 0
+                    for i in range(n):
+                        if order[i] is None:
+                            order[i] = shuffled_rem[idx]
+                            idx += 1
+                    orders.append(order)
 
     elif mode == 'balanced_all':
         print(f" Генерируем по {total_runs} порядков для каждой из {n} позиций: всего {total_runs * n} порядков\n")
@@ -162,8 +182,8 @@ def generate_lex_orders(variables, total_runs=30, mode='balanced_first'):
                 for p, var in enumerate(order):
                     counts.loc[var, f'pos_{p + 1}'] += 1
 
-            counts.to_csv(f'results_cyclic7_lex/position_counts_pos{pos + 1}.csv', sep=';')
-            print("готово")
+            counts.to_csv(f'results_geneig_lex/position_counts_pos{pos + 1}.csv', sep=';')
+            print("Готово")
             orders.extend(group)
 
         print(f"\n Сгенерировано {len(orders)} порядков (по {total_runs} на каждую позицию)\n")
@@ -183,8 +203,6 @@ def generate_lex_orders(variables, total_runs=30, mode='balanced_first'):
         random.shuffle(orders)
 
     random.shuffle(orders)
-    return orders
-
     if mode in ('random', 'old_style'):
         return orders[:total_runs]
     else:
@@ -196,7 +214,7 @@ def count_and_report_positions(orders, variables, out_dir='results_geneig_lex'):
    # Подсчитываем, сколько раз каждая переменная оказалась на каждой позиции в списке порядков
 
     n = len(variables)
-    # Создаём таблицу: строки — переменные, столбцы — позиции
+    # Создаём таблицу: строки - переменные, столбцы - позиции
     counts = pd.DataFrame(0, index=sorted(variables), columns=[f'pos_{i + 1}' for i in range(n)])
 
     for order in orders:
@@ -215,7 +233,7 @@ def count_and_report_positions(orders, variables, out_dir='results_geneig_lex'):
 
     return counts
 
-def run_geneig_lex_experiments(total_runs=100, mode='balanced_first', seed=42, out_dir='results_geneig_lex'):
+def run_geneig_lex_experiments(total_runs=100, mode='balanced_first', seed=42, out_dir='geneig_lex'):
 
     random.seed(seed)
 
