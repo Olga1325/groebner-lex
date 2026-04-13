@@ -42,11 +42,13 @@
 **groebner-lex/**
 - `main_tester_100.py` — основной скрипт запуска экспериментов
 - `grafic_100.py` — скрипт построения графиков
+- `Statistucs.py` — скрипт для получения статистики
 - `README.md` — описание проекта
 
 **json/** — входные тестовые системы
 - `geneig.json`
 - `comb3000.json`
+- `butcher.json`
 
 **geneig_lex/** — результаты для теста geneig
 - `geneig_run001.json` ... `geneig_run600.json` — JSON-файлы прогонов 
@@ -55,6 +57,7 @@
 - `time_vs_memory_clean_and_full.png`
 
 **comb3000_lex/** — результаты для теста comb3000 (аналогичная структура)
+**butcher_lex/** — результаты для теста butcher (аналогичная структура)
 
 
 ## Как воспроизвести эксперимент
